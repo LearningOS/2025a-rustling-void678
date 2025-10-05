@@ -37,17 +37,15 @@ impl Graph for UndirectedGraph {
     fn add_edge(&mut self, edge: (&str, &str, i32)) {
         let (from, to, weight) = edge;
         
-        // 确保两个节点都存在
         self.add_node(from);
         self.add_node(to);
         
-        // 添加从 from 到 to 的边
         self.adjacency_table_mutable()
             .get_mut(from)
             .unwrap()
             .push((to.to_string(), weight));
         
-        // 添加从 to 到 from 的边（无向图）
+        
         self.adjacency_table_mutable()
             .get_mut(to)
             .unwrap()
@@ -70,7 +68,7 @@ pub trait Graph {
     }
     
     fn add_edge(&mut self, _edge: (&str, &str, i32)) {
-        // 默认实现为空，具体实现由各个图类型提供
+     
     }
     
     fn contains(&self, node: &str) -> bool {
@@ -102,7 +100,7 @@ mod test_undirected_graph {
     fn test_add_node() {
         let mut graph = UndirectedGraph::new();
         assert_eq!(graph.add_node("a"), true);
-        assert_eq!(graph.add_node("a"), false); // 重复添加应该返回 false
+        assert_eq!(graph.add_node("a"), false); 
         assert_eq!(graph.contains("a"), true);
         assert_eq!(graph.contains("b"), false);
     }
